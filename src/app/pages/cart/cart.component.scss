@@ -1,0 +1,17 @@
+.iconPlusMinus {
+  border: solid 1px;
+  padding: 1px;
+  border-radius: 100%;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.fa-plus:hover {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.fa-minus:hover {
+  color: red;
+  cursor: pointer;
+}

@@ -1,0 +1,21 @@
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+  <div *ngFor="let book of listBook" class="col mb-4" >
+    <div class="card" style="padding: 1rem; height: 100%;" >
+      <h5 class="card-title alignCenter"><b>{{book.name | uppercase}}</b></h5>
+      <h6 class="card-title alignCenter">{{book.author}}</h6>
+      <div class="alignCenter">
+        <img [src]="book.photoUrl" class="card-img-top imgBook" [alt]="book.name">
+      </div>
+      <div class="card-body" >
+        <p class="card-text alignCenter" style="margin-bottom: 2rem;">{{book.description | reduceText:15}}</p>
+        <div class="divPrice">
+          <span>{{book.price}}€</span>
+        </div>
+        <div class="alignCenter divAddCart" (click)="bookService.addBookToCart(book)">
+            <i class="fas fa-cart-plus addCart"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

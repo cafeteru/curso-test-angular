@@ -1,0 +1,40 @@
+{
+  "book": [
+	{
+		"id": "1",
+		"name": "Book 1",
+		"author": "Author name 1",
+		"isbn": "165464576456",
+		"description": "Book Description 1",
+		"photoUrl": "/assets/img/book.png",
+		"price": "8"
+	},
+	{
+		"id": "2",
+		"name": "Book 2",
+		"author": "Author name 2",
+		"isbn": "265464576456",
+		"description": "Book Description 2",
+		"photoUrl": "/assets/img/book.png",
+		"price": "10"
+	},
+	{
+		"id": "3",
+		"name": "Book 3",
+		"author": "Author name 3",
+		"isbn": "365464576456",
+		"description": "Book Description 3",
+		"photoUrl": "/assets/img/book.png",
+		"price": "15"
+	},
+	{
+		"id": "4",
+		"name": "Book 4",
+		"author": "Author name 4",
+		"isbn": "465464576456",
+		"description": "Book Description 4",
+		"photoUrl": "/assets/img/book.png",
+		"price": "22"
+	}
+  ]
+}
