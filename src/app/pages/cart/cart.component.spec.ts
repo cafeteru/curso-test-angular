@@ -1,8 +1,8 @@
 import { BookService } from 'src/app/services/book.service';
-import { CartComponent } from "./cart.component";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { CartComponent } from './cart.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Book } from 'src/app/models/book.model';
 
 const listBook: Book[] = [
@@ -60,8 +60,11 @@ describe('CartComponent', () => {
         fixture = TestBed.createComponent(CartComponent);
         component = fixture.componentInstance;
         fixture.detectChanges(); // Para entrar en el ngOnInit del componente
+
         // Para obtener el servicio aunque sea privado
         service = fixture.debugElement.injector.get(BookService);
+        // Mockeamos la llamada al servicio
+        spyOn(service, 'getBooksFromCart').and.callFake(() => listBook);
     });
 
     // Comprobamos la creación del componente
@@ -82,7 +85,7 @@ describe('CartComponent', () => {
         const amount = book.amount;
         // Observa el método del servicio
         const spyUpdateAmountBook = spyOn(service, 'updateAmountBook')
-            // callFake: mockea la respuesta del método, es decir, 
+            // callFake: mockea la respuesta del método, es decir,
             // devuelve la función que indiquemos
             .and.callFake(() => []);
         const spyGetTotalPrice = spyOn(component, 'getTotalPrice').and.callFake(() => 0);
@@ -102,5 +105,17 @@ describe('CartComponent', () => {
         expect(spyUpdateAmountBook).toHaveBeenCalled();
         expect(spyGetTotalPrice).toHaveBeenCalled();
         expect(book.amount).toBe(amount - 1);
+    });
+
+    it('check onClearBooks works correctly', () => {
+        // Hay que realizar este casteo para poder acceder a
+        // los métodos privados pero no es la mejor opción
+        const spy = spyOn((component as any), '_clearListCartBook')
+            // Se ejecuta de manera normal pero también se observa
+            .and.callThrough();
+        component.listCartBook = listBook;
+        component.onClearBooks();
+        expect(component.listCartBook.length).toBe(0);
+        expect(spy).toHaveBeenCalled();
     });
 });
