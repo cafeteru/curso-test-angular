@@ -11,7 +11,6 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   public listBook: Book[] = [];
 
   constructor(
@@ -19,15 +18,15 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.getBooks();
-
   }
 
   public getBooks(): void {
-    this.bookService.getBooks().pipe(take(1)).subscribe((resp: Book[]) => {
-      this.listBook = resp;
-    });
+    this.bookService.getBooks().pipe(take(1)).subscribe(
+      (resp) => {
+        this.listBook = resp;
+      }
+    );
   }
 
 }

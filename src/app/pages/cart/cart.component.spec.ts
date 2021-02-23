@@ -69,7 +69,7 @@ describe('CartComponent', () => {
 
     // Comprobamos la creación del componente
     it('should create', () => {
-        expect(component).toBeTruthy()
+        expect(component).toBeTruthy();
     });
 
     it('check getTotalPrice return an amount', () => {

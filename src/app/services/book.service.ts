@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 export class BookService {
 
   constructor(
+    // tslint:disable-next-line: variable-name
     private readonly _httpClient: HttpClient
   ) { }
 
@@ -36,14 +37,14 @@ export class BookService {
     let listBook: Book[] = JSON.parse(localStorage.getItem('listCartBook'));
     if (listBook === null) { // Create a list with the book
       book.amount = 1;
-      listBook = [ book ];
-    } else { 
+      listBook = [book];
+    } else {
       const index = listBook.findIndex((item: Book) => {
         return book.id === item.id;
       });
       if (index !== -1) { // Update the quantity in the existing book
         listBook[index].amount++;
-      } else { 
+      } else {
         book.amount = 1;
         listBook.push(book);
       }

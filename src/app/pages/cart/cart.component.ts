@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   public Math = Math;
 
   constructor(
+    // tslint:disable-next-line: variable-name
     private readonly _bookService: BookService
   ) { }
 
