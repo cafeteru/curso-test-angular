@@ -1,9 +1,11 @@
-import { BookService } from 'src/app/services/book.service';
-import { CartComponent } from './cart.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Book } from 'src/app/models/book.model';
+import { BookService } from 'src/app/services/book.service';
+
+import { CartComponent } from './cart.component';
 
 const listBook: Book[] = [
     {
@@ -117,5 +119,26 @@ describe('CartComponent', () => {
         component.onClearBooks();
         expect(component.listCartBook.length).toBe(0);
         expect(spy).toHaveBeenCalled();
+    });
+
+    it('The title "The cart is empty" is not displayed when there is a list', () => {
+        component.listCartBook = listBook;
+        // Para forzar la actualización de la vista
+        fixture.detectChanges();
+        // Usamos By como en Selenium
+        // query -> devuelve un element
+        // queryAll -> devuelve un listado
+        const debugElement: DebugElement = fixture.debugElement.query(By.css('#titleEmpty'));
+        expect(debugElement).toBeFalsy();
+    });
+
+    it('The title "The cart is empty" is displayed when there isn´t a list', () => {
+        component.listCartBook = [];
+        fixture.detectChanges();
+        const debugElement: DebugElement = fixture.debugElement.query(By.css('#titleEmpty'));
+        expect(debugElement).toBeTruthy();
+        // Comprobamos el texto del elemento HTML
+        const element: HTMLElement = debugElement.nativeElement;
+        expect(element.innerHTML).toContain('The cart is empty');
     });
 });
